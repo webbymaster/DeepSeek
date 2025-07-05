@@ -39,7 +39,7 @@ if ($first == 'create') {
         PT_RunInBackground(array('status' => 200,
                                  'post_id' => $post_id));
 
-        if ($pt->config->live_video == 1 && $pt->config->live_video_save == 1) {
+    if ($pt->config->live_video == 1 && $pt->config->live_video_save == 1) {
     // Общие параметры для всех хранилищ
     $stream_name = PT_Secure($_POST['stream_name']);
     $uid = explode('_', $stream_name)[2] ?? 0;
@@ -126,10 +126,10 @@ if ($first == 'create') {
     exit();
 }
 if ($first == 'check_comments') {
-	if (!empty($_POST['post_id']) && is_numeric($_POST['post_id']) && $_POST['post_id'] > 0) {
-		$post_id = PT_Secure($_POST['post_id']);
-		$post_data = $video_data = $pt->get_video = $db->where('id',$post_id)->getOne(T_VIDEOS);
-		if (!empty($post_data)) {
+    if (!empty($_POST['post_id']) && is_numeric($_POST['post_id']) && $_POST['post_id'] > 0) {
+        $post_id = PT_Secure($_POST['post_id']);
+        $post_data = $video_data = $pt->get_video = $db->where('id',$post_id)->getOne(T_VIDEOS);
+        if (!empty($post_data)) {
             if ($post_data->live_ended == 0) {
                 //if ($_POST['page'] == 'story') {
                     $user_comment = $db->where('video_id',$post_id)->where('user_id',$pt->user->id)->getOne(T_COMMENTS);
@@ -316,16 +316,16 @@ if ($first == 'check_comments') {
                 $data['message'] = $lang->please_check_details;
             }
             
-		}
-		else{
-			$data['message'] = $lang->please_check_details;
+        }
+        else{
+            $data['message'] = $lang->please_check_details;
             $data['removed'] = 'yes';
-		}
-	}
-	else{
-		$data['message'] = $lang->please_check_details;
-	}
-	header("Content-type: application/json");
+        }
+    }
+    else{
+        $data['message'] = $lang->please_check_details;
+    }
+    header("Content-type: application/json");
     echo json_encode($data);
     exit();
 }
